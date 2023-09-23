@@ -2,8 +2,6 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/userSchema");
 
 const Authenticate = async (req, res, next) => {
-  // console.log("------This log is from middleware");
-  // console.log(req.cookies.jwtoken);
   let token;
   try {
     token = req.cookies.jwtoken;

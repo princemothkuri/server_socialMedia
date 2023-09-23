@@ -19,12 +19,6 @@ router.post("/", async (req, res) => {
       const passVerify = await bcrypt.compare(password, userLogin.password);
       if (passVerify) {
         const token = await userLogin.genarateAuthToken();
-        // console.log(token);
-        //----------method of token expire after some milli seconds--------------
-        // res.cookie("jwtoken", token, {
-        //   expires: new Date(Date.now + 600000),
-        //   httpOnly: true,
-        // });
 
         //----------method of token not expire after some milli seconds--------------
         res.cookie("jwtoken", token);
@@ -69,8 +63,6 @@ router.put("/reset", async (req, res) => {
           { _id: userLogin._id },
           { $set: { password: pass } }
         );
-
-        // await userLogin.save();
 
         return res.status(201).json({
           status: 201,

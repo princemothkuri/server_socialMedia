@@ -21,10 +21,9 @@ router.get("/", authenticate, async (req, res) => {
 // --------------create post of a current user---------------
 router.post("/post", authenticate, async (req, res) => {
   const { pic, description } = req.body;
-  //   console.log(pic);
+
   console.log(description);
   try {
-    // const user = await User.findById(req.user.id).select("-password");
     const newPost = new Post({
       image: pic,
       description: description,
@@ -44,12 +43,11 @@ router.post("/post", authenticate, async (req, res) => {
 router.delete("/", authenticate, async (req, res) => {
   try {
     const user = await Post.findById(req.body.id);
-    // console.log(user);
-    // console.log(user.user.toString());
+
     if (!user) {
       return res.status(400).json({ status: 400, error: "post not found!" });
     }
-    // console.log(req.userID.toString());
+
     if (user.user.toString() !== req.userID.toString()) {
       return res
         .status(401)
@@ -76,7 +74,7 @@ router.post("/postid", authenticate, async (req, res) => {
     if (!post) {
       return res.status(404).json({ status: 404, error: "Post not found!" });
     }
-    // console.log(post);
+
     return res.status(201).json({ status: 201, post });
   } catch (err) {
     console.error(err);
@@ -117,13 +115,12 @@ router.put("/like", authenticate, async (req, res) => {
         count = count + 1;
       }
     });
-    // post.unlikes.filter((unlike) => unlike.user.toString() === req.userID
+
     if (count > 0) {
       const removeIndex = post.unlikes
         .map((unlike) => unlike.user.toString())
         .indexOf(req.userID);
       post.unlikes.splice(removeIndex, 1);
-      // post.unlikes.shift({ user: req.user.id });
 
       await post.save();
     }
@@ -135,8 +132,6 @@ router.put("/like", authenticate, async (req, res) => {
         count = count + 1;
       }
     });
-
-    // post.likes.filter((like) => like.user.toString() === req.userID).length
 
     if (count > 0) {
       return res
@@ -173,7 +168,6 @@ router.put("/unlike", authenticate, async (req, res) => {
         .map((like) => like.user.toString())
         .indexOf(req.userID);
       post.likes.splice(removeIndex, 1);
-      // post.likes.shift({ user: req.user.id });
 
       await post.save();
     }
