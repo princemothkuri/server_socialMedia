@@ -6,7 +6,7 @@ const app = express();
 var cors = require("cors");
 app.use(
   cors({
-    origin: "https://client-social-media-12i70gndr-vamshi9666.vercel.app/",
+    origin: "*",
   })
 );
 
