@@ -4,14 +4,18 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const app = express();
 var cors = require("cors");
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://client-social-media-12i70gndr-vamshi9666.vercel.app/",
+  })
+);
 
-var corsOptions = {
-  origin: "*",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-};
+// var corsOptions = {
+//   origin: "https://client-social-media-12i70gndr-vamshi9666.vercel.app/",
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//   preflightContinue: false,
+//   optionsSuccessStatus: 204,
+// };
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser.json());
