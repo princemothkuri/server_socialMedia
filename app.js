@@ -6,9 +6,15 @@ const app = express();
 var cors = require("cors");
 app.use(
   cors({
-    origin: "*",
+    origin: "https://client-social-media-b9bifp1d8-vamshi9666.vercel.app/",
+    methods: ["GET", "POST", "PUT"],
+    credentials: true,
   })
 );
+
+app.get("/", (req, res) => {
+  res.send("Hello");
+});
 
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
