@@ -6,7 +6,7 @@ const app = express();
 var cors = require("cors");
 app.use(
   cors({
-    origin: "https://client-social-media-br9dw5ta5-princemothkuri.vercel.app/",
+    origin: "*",
     methods: ["GET", "POST", "PUT"],
     credentials: true,
   })
