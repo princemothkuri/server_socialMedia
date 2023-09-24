@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
           status: 201,
           message: "Login Successful!",
           id: userLogin._id,
-
+          username: userLogin.username,
           token: token,
         });
       } else {
