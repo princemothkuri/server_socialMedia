@@ -26,8 +26,6 @@ router.post("/", async (req, res) => {
           httpOnly: true,
           maxAge: 3600000 * 5,
           secure: true,
-          sameSite: "none",
-          domain: ".vercel.app",
         });
         return res.status(201).json({
           status: 201,
