@@ -30,7 +30,6 @@ require("./db/conn");
 app.use(express.json()); //converting data into json format and this is also a middleWare
 
 app.use("/api/users", require("./router/login"));
-app.use("/api/logout", require("./router/logout"));
 app.use("/api/register", require("./router/register"));
 app.use("/api/posts", require("./router/posts"));
 

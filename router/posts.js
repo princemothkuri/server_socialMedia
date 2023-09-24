@@ -4,7 +4,7 @@ const Post = require("../models/PostSchema");
 const authenticate = require("../middleware/authenticate");
 
 // ------to get all posts from posts collection-------------
-router.get("/", authenticate, async (req, res) => {
+router.post("/", authenticate, async (req, res) => {
   try {
     const posts = await Post.find().sort({ date: -1 });
 
@@ -12,7 +12,7 @@ router.get("/", authenticate, async (req, res) => {
       return res.status(400).json({ status: 400, error: "No posts" });
     }
 
-    return res.status(201).json({ status: 201, posts });
+    return res.status(201).json({ status: 201, message: posts });
   } catch (err) {
     console.error(err);
   }
