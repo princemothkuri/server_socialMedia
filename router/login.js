@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
       const passVerify = await bcrypt.compare(password, userLogin.password);
       if (passVerify) {
         const token = await userLogin.genarateAuthToken();
-
+        console.log("--->" + token);
         //----------method of token not expire after some milli seconds--------------
         res.cookie("jwtoken", token);
         return res.status(201).json({
