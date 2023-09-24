@@ -109,24 +109,7 @@ router.put("/like", authenticate, async (req, res) => {
   try {
     const post = await Post.findById(req.body.id);
 
-    // ----checking if the post is unliked, if unliked removing the unlike----------
-    post.unlikes.filter((unlike) => {
-      if (!unlike.user.toString().localeCompare(req.userID)) {
-        count = count + 1;
-      }
-    });
-
-    if (count > 0) {
-      const removeIndex = post.unlikes
-        .map((unlike) => unlike.user.toString())
-        .indexOf(req.userID);
-      post.unlikes.splice(removeIndex, 1);
-
-      await post.save();
-    }
-
     //check if the post is already liked
-    count = 0;
     post.likes.filter((like) => {
       if (!like.user.toString().localeCompare(req.userID)) {
         count = count + 1;
@@ -171,23 +154,7 @@ router.put("/unlike", authenticate, async (req, res) => {
 
       await post.save();
     }
-    count = 0;
-    // -----checking if the post is unliked or not-------------
-    post.unlikes.filter((unlike) => {
-      if (!unlike.user.toString().localeCompare(req.userID)) {
-        count = count + 1;
-      }
-    });
-    if (count > 0) {
-      return res
-        .status(400)
-        .json({ status: 400, error: "you have already unLiked!" });
-    }
 
-    // -----unliking the post-------
-    post.unlikes.unshift({ user: req.userID });
-
-    await post.save();
     return res.status(201).json({ status: 201, message: "unLiked post" });
   } catch (err) {
     console.error(err.message);
